@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Любимые песни — kravtov{% endblock %}
+{% block content %}
+<section class="page-heading reveal">
+    <p class="eyebrow"><span class="eyebrow-line"></span> PERSONAL DATABASE / 002</p>
+    <h1 class="display-title">МОИ ЛЮБИМЫЕ<span> ТРЕКИ</span></h1>
+    <p class="page-intro">Треки которые радуют мои уши.</p>
+</section>
+
+<section class="collection-layout">
+    <div class="collection-aside reveal">
+        <span class="aside-number">02</span>
+        <div class="vertical-caption">FREQUENCIES FROM THE DEEP</div>
+        <div class="soundwave" aria-hidden="true">
+            {% for n in range(18) %}<i style="--bar: {{ [24, 42, 31, 58, 76, 46, 65, 33, 52, 82, 39, 61, 28, 70, 45, 56, 34, 67][n] }}px"></i>{% endfor %}
+        </div>
+    </div>
+
+    <div class="collection-main">
+        {% if songs %}
+            <div class="collection-grid">
+                {% for song in songs %}
+                <article class="media-card song-card reveal">
+                    <div class="card-art song-art">
+                        <div class="cover-frame{% if not song.image %} cover-placeholder{% endif %}">
+                            {% if song.image %}
+                                <img class="card-image" src="{{ url_for('static', filename=song.image) }}" alt="Обложка песни {{ song.title }}" loading="lazy">
+                            {% else %}
+                                <span class="art-symbol">♫</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-kicker">НАЗВАНИЕ ТРЕКА</span>
+                        <h2>{{ song.title }}</h2>
+                        <p class="card-subtitle">{{ song.artist }}</p>
+                        {% if song.note %}<p class="card-note">{{ song.note }}</p>{% endif %}
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-status">TRACK / {{ "%02d"|format(loop.index) }}</span>
+                        <i class="status-dot" aria-hidden="true"></i>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state reveal">
+                <div class="empty-icon">♫</div>
+                <span class="card-kicker">PLAYLIST NOT FOUND</span>
+                <h2>ТВОЙ САУНДТРЕК<br><em>НАЧИНАЕТСЯ ЗДЕСЬ.</em></h2>
+                <p>Добавь любимые песни в список <code>SONGS</code> в файле <code>app.py</code> — они появятся на этой странице.</p>
+                <div class="empty-hint">TITLE&nbsp; / &nbsp;ARTIST&nbsp; / &nbsp;YOUR NOTE</div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

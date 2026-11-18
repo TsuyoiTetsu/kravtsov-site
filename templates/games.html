@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Любимые игры — kravtov{% endblock %}
+{% block content %}
+<section class="page-heading reveal">
+    <p class="eyebrow"><span class="eyebrow-line"></span> PERSONAL DATABASE / 003</p>
+    <h1 class="display-title">МОИ ЛЮБИМЫЕ <span> ИГРЫ</span></h1>
+    <p class="page-intro">Любимые игры которые оставили хорошие воспоминания.</p>
+</section>
+
+<section class="collection-layout">
+    <div class="collection-aside reveal">
+        <span class="aside-number">03</span>
+        <div class="vertical-caption">ANOTHER WORLD IS WAITING</div>
+        <div class="crosshair" aria-hidden="true"><span></span><i></i></div>
+    </div>
+
+    <div class="collection-main">
+        {% if games %}
+            <div class="collection-grid">
+                {% for game in games %}
+                <article class="media-card game-card reveal">
+                    <div class="card-art game-art">
+                        <div class="cover-frame{% if not game.image %} cover-placeholder{% endif %}">
+                            {% if game.image %}
+                                <img class="card-image" src="{{ url_for('static', filename=game.image) }}" alt="Обложка игры {{ game.title }}" loading="lazy">
+                            {% else %}
+                                <span class="art-symbol">◇</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-kicker">НАЗВАНИЕ ИГРЫ</span>
+                        <h2>{{ game.title }}</h2>
+                        <p class="card-subtitle">ЖАНР: {{ game.genre }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-status">GAME / {{ "%02d"|format(loop.index) }} &nbsp;•&nbsp; В КОЛЛЕКЦИИ</span>
+                        <i class="status-dot" aria-hidden="true"></i>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state reveal">
+                <div class="empty-icon">◇</div>
+                <span class="card-kicker">SAVE DATA EMPTY</span>
+                <h2>ТВОЁ СЛЕДУЮЩЕЕ<br><em>ПРИКЛЮЧЕНИЕ.</em></h2>
+                <p>Добавь любимые игры в список <code>GAMES</code> в файле <code>app.py</code> — здесь появятся карточки.</p>
+                <div class="empty-hint">TITLE&nbsp; / &nbsp;GENRE&nbsp; / &nbsp;YOUR NOTE</div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

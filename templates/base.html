@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#06162d">
+    <title>{% block title %}MY SITE{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script defer src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+    <div class="ocean-bg" aria-hidden="true">
+        <div class="ocean-glow"></div>
+        <div class="light-rays"></div>
+        <div class="ocean-grid"></div>
+        <span class="bubble bubble-1"></span>
+        <span class="bubble bubble-2"></span>
+        <span class="bubble bubble-3"></span>
+        <span class="bubble bubble-4"></span>
+        <span class="bubble bubble-5"></span>
+        <span class="bubble bubble-6"></span>
+        <span class="bubble bubble-7"></span>
+    </div>
+
+    <header class="site-header">
+        <div class="header-clock">
+            <span class="clock-label">LOCAL TIME</span>
+            <span id="live-clock">--:--:--</span>
+        </div>
+    </header>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+        {% block page_navigation %}
+        <nav class="page-nav" aria-label="Навигация по сайту">
+            <a class="nav-link {% if active == 'about' %}active{% endif %}" href="{{ url_for('about') }}"><span class="nav-index">01</span>ОБО МНЕ</a>
+            <a class="nav-link {% if active == 'songs' %}active{% endif %}" href="{{ url_for('songs') }}"><span class="nav-index">02</span>ТРЕКИ</a>
+            <a class="nav-link {% if active == 'games' %}active{% endif %}" href="{{ url_for('games') }}"><span class="nav-index">03</span>ИГРЫ</a>
+        </nav>
+        {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <span class="footer-center">A LITTLE SITE UNDER THE SEA</span>
+        <span class="footer-signal"><i></i> SYSTEM ONLINE</span>
+    </footer>
+</body>
+</html>

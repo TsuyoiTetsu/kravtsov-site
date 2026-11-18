@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Обо мне — kravtov{% endblock %}
+{% block page_navigation %}{% endblock %}
+{% block content %}
+<section class="hero about-hero">
+    <div class="hero-copy reveal">
+        <p class="eyebrow"><span class="eyebrow-line"></span> PERSONAL DATABASE / 001</p>
+        <h1 class="display-title">ОБО<br><span>МНЕ</span></h1>
+        <p class="hero-description">{{ profile.description }}</p>
+
+        <nav class="page-nav hero-nav" aria-label="Навигация по сайту">
+            <a class="nav-link active" href="{{ url_for('about') }}"><span class="nav-index">01</span>ОБО МНЕ</a>
+            <a class="nav-link" href="{{ url_for('songs') }}"><span class="nav-index">02</span>ТРЕКИ</a>
+            <a class="nav-link" href="{{ url_for('games') }}"><span class="nav-index">03</span>ИГРЫ</a>
+        </nav>
+    </div>
+
+    <div class="profile-panel reveal">
+        <div class="avatar-area">
+            <div class="avatar-frame">
+                {% if profile.avatar %}
+                    <img
+                        class="avatar-image"
+                        src="{{ url_for('static', filename=profile.avatar) }}"
+                        alt="Аватар {{ profile.name }}"
+                    >
+                {% else %}
+                    <div class="avatar-placeholder">
+                        <span class="avatar-placeholder-plus">＋</span>
+                        <span>ADD AVATAR</span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="profile-details">
+            <span class="detail-label">NAME / 名前</span>
+            <h2>{{ profile.name }}</h2>
+            <h1 class="nickname">{{ profile.nickname }}</h1>
+            <h1 class="age"> Возраст: {{ profile.age }}</h1>
+        </div>
+        <div class="panel-status">
+            <span>{{ profile.status }}</span><span class="status-dot"></span>
+        </div>
+    </div>
+
+    <div class="hero-side-label">THE DEPTHS</div>
+</section>
+
+{% endblock %}
