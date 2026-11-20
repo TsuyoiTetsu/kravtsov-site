@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
@@ -134,6 +134,9 @@ def songs():
 def games():
     return render_template("games.html", games=GAMES, active="games")
 
+@app.get("/health")
+def health():
+    return jsonify({"status": "ok"}), 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True, port=8016)
