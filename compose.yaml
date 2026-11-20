@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    container_name: kravtsovsite
+    restart: unless-stopped
+    ports:
+      - "8016:8016"
